@@ -1,0 +1,26 @@
+name: "ocr_crnn"
+platform: "tensorrt_plan"
+max_batch_size: 1
+dynamic_batching {}
+default_model_filename: "crnn.trt"
+
+input [
+  {
+    name: "input1"
+    data_type: TYPE_FP32
+    dims: [1, 64, -1]
+  }
+]
+output [
+  {
+    name: "output"
+    data_type: TYPE_FP32
+    dims: [-1, 97]
+  }
+]
+instance_group [
+  {
+    kind: KIND_GPU
+    count: 2
+  }
+]

@@ -1,0 +1,31 @@
+name: "ocr_craft"
+platform: "tensorrt_plan"
+max_batch_size: 1
+dynamic_batching {}
+default_model_filename: "craft.trt"
+
+input [
+  {
+    name: "input"
+    data_type: TYPE_FP32
+    dims: [3, -1, -1]
+  }
+]
+output [
+  {
+    name: "output"
+    data_type: TYPE_FP32
+    dims: [-1, -1, 2]
+  },
+  {
+    name: "onnx::Conv_281"
+    data_type: TYPE_FP32
+    dims: [32, -1, -1]
+  }
+]
+instance_group [
+  {
+    kind: KIND_GPU
+    count: 2
+  }
+]
